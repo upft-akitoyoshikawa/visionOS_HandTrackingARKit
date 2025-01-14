@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB716DDB2D36378100FE09A3 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = BB716DDA2D36378100FE09A3 /* RealityKitContent */; };
+		BB716E092D36379200FE09A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB716DFF2D36379200FE09A3 /* Preview Assets.xcassets */; };
+		BB716E0A2D36379200FE09A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB716E022D36379200FE09A3 /* Assets.xcassets */; };
+		BB716E0C2D36379200FE09A3 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E012D36379200FE09A3 /* AppModel.swift */; };
+		BB716E0D2D36379200FE09A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E032D36379200FE09A3 /* ContentView.swift */; };
+		BB716E0E2D36379200FE09A3 /* HandTrackingARKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E042D36379200FE09A3 /* HandTrackingARKitApp.swift */; };
+		BB716E0F2D36379200FE09A3 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E052D36379200FE09A3 /* ImmersiveView.swift */; };
+		BB716E102D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E072D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift */; };
+		BB716E132D3637D000FE09A3 /* EntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E122D3637C800FE09A3 /* EntityModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BB716DF12D36378300FE09A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB716DCD2D36378100FE09A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BB716DD42D36378100FE09A3;
+			remoteInfo = HandTrackingARKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BB716DD52D36378100FE09A3 /* HandTrackingARKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandTrackingARKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB716DD92D36378100FE09A3 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
+		BB716DF02D36378300FE09A3 /* HandTrackingARKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HandTrackingARKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB716DFF2D36379200FE09A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BB716E012D36379200FE09A3 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		BB716E022D36379200FE09A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB716E032D36379200FE09A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BB716E042D36379200FE09A3 /* HandTrackingARKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingARKitApp.swift; sourceTree = "<group>"; };
+		BB716E052D36379200FE09A3 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
+		BB716E062D36379200FE09A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB716E072D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
+		BB716E122D3637C800FE09A3 /* EntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BB716DF32D36378300FE09A3 /* HandTrackingARKitTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = HandTrackingARKitTests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB716DD22D36378100FE09A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB716DDB2D36378100FE09A3 /* RealityKitContent in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB716DED2D36378300FE09A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BB716DCC2D36378100FE09A3 = {
+			isa = PBXGroup;
+			children = (
+				BB716E082D36379200FE09A3 /* HandTrackingARKit */,
+				BB716DD82D36378100FE09A3 /* Packages */,
+				BB716DF32D36378300FE09A3 /* HandTrackingARKitTests */,
+				BB716DD62D36378100FE09A3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BB716DD62D36378100FE09A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB716DD52D36378100FE09A3 /* HandTrackingARKit.app */,
+				BB716DF02D36378300FE09A3 /* HandTrackingARKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB716DD82D36378100FE09A3 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				BB716DD92D36378100FE09A3 /* RealityKitContent */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		BB716E002D36379200FE09A3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BB716DFF2D36379200FE09A3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BB716E082D36379200FE09A3 /* HandTrackingARKit */ = {
+			isa = PBXGroup;
+			children = (
+				BB716E002D36379200FE09A3 /* Preview Content */,
+				BB716E012D36379200FE09A3 /* AppModel.swift */,
+				BB716E022D36379200FE09A3 /* Assets.xcassets */,
+				BB716E032D36379200FE09A3 /* ContentView.swift */,
+				BB716E042D36379200FE09A3 /* HandTrackingARKitApp.swift */,
+				BB716E052D36379200FE09A3 /* ImmersiveView.swift */,
+				BB716E062D36379200FE09A3 /* Info.plist */,
+				BB716E072D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift */,
+				BB716E112D3637BE00FE09A3 /* Models */,
+			);
+			path = HandTrackingARKit;
+			sourceTree = "<group>";
+		};
+		BB716E112D3637BE00FE09A3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB716E122D3637C800FE09A3 /* EntityModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BB716DD42D36378100FE09A3 /* HandTrackingARKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB716DF72D36378300FE09A3 /* Build configuration list for PBXNativeTarget "HandTrackingARKit" */;
+			buildPhases = (
+				BB716DD12D36378100FE09A3 /* Sources */,
+				BB716DD22D36378100FE09A3 /* Frameworks */,
+				BB716DD32D36378100FE09A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HandTrackingARKit;
+			packageProductDependencies = (
+				BB716DDA2D36378100FE09A3 /* RealityKitContent */,
+			);
+			productName = HandTrackingARKit;
+			productReference = BB716DD52D36378100FE09A3 /* HandTrackingARKit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BB716DEF2D36378300FE09A3 /* HandTrackingARKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB716DFC2D36378300FE09A3 /* Build configuration list for PBXNativeTarget "HandTrackingARKitTests" */;
+			buildPhases = (
+				BB716DEC2D36378300FE09A3 /* Sources */,
+				BB716DED2D36378300FE09A3 /* Frameworks */,
+				BB716DEE2D36378300FE09A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB716DF22D36378300FE09A3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BB716DF32D36378300FE09A3 /* HandTrackingARKitTests */,
+			);
+			name = HandTrackingARKitTests;
+			packageProductDependencies = (
+			);
+			productName = HandTrackingARKitTests;
+			productReference = BB716DF02D36378300FE09A3 /* HandTrackingARKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BB716DCD2D36378100FE09A3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					BB716DD42D36378100FE09A3 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					BB716DEF2D36378300FE09A3 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = BB716DD42D36378100FE09A3;
+					};
+				};
+			};
+			buildConfigurationList = BB716DD02D36378100FE09A3 /* Build configuration list for PBXProject "HandTrackingARKit" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BB716DCC2D36378100FE09A3;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BB716DD62D36378100FE09A3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB716DD42D36378100FE09A3 /* HandTrackingARKit */,
+				BB716DEF2D36378300FE09A3 /* HandTrackingARKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB716DD32D36378100FE09A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB716E092D36379200FE09A3 /* Preview Assets.xcassets in Resources */,
+				BB716E0A2D36379200FE09A3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB716DEE2D36378300FE09A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB716DD12D36378100FE09A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB716E132D3637D000FE09A3 /* EntityModel.swift in Sources */,
+				BB716E0C2D36379200FE09A3 /* AppModel.swift in Sources */,
+				BB716E0D2D36379200FE09A3 /* ContentView.swift in Sources */,
+				BB716E0E2D36379200FE09A3 /* HandTrackingARKitApp.swift in Sources */,
+				BB716E0F2D36379200FE09A3 /* ImmersiveView.swift in Sources */,
+				BB716E102D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB716DEC2D36378300FE09A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BB716DF22D36378300FE09A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BB716DD42D36378100FE09A3 /* HandTrackingARKit */;
+			targetProxy = BB716DF12D36378300FE09A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BB716DF82D36378300FE09A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HandTrackingARKit/Preview Content\"";
+				DEVELOPMENT_TEAM = R6YNJ9HW8W;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.upft.HandTrackingARKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Debug;
+		};
+		BB716DF92D36378300FE09A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HandTrackingARKit/Preview Content\"";
+				DEVELOPMENT_TEAM = R6YNJ9HW8W;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.upft.HandTrackingARKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Release;
+		};
+		BB716DFA2D36378300FE09A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = xros;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		BB716DFB2D36378300FE09A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = xros;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		BB716DFD2D36378300FE09A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R6YNJ9HW8W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.upft.HandTrackingARKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HandTrackingARKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HandTrackingARKit";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		BB716DFE2D36378300FE09A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R6YNJ9HW8W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.upft.HandTrackingARKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HandTrackingARKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HandTrackingARKit";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB716DD02D36378100FE09A3 /* Build configuration list for PBXProject "HandTrackingARKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB716DFA2D36378300FE09A3 /* Debug */,
+				BB716DFB2D36378300FE09A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB716DF72D36378300FE09A3 /* Build configuration list for PBXNativeTarget "HandTrackingARKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB716DF82D36378300FE09A3 /* Debug */,
+				BB716DF92D36378300FE09A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB716DFC2D36378300FE09A3 /* Build configuration list for PBXNativeTarget "HandTrackingARKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB716DFD2D36378300FE09A3 /* Debug */,
+				BB716DFE2D36378300FE09A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BB716DDA2D36378100FE09A3 /* RealityKitContent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealityKitContent;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BB716DCD2D36378100FE09A3 /* Project object */;
+}
