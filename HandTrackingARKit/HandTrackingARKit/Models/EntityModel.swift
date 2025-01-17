@@ -69,58 +69,172 @@ class EntityModel {
         }
     }
     
+    // 前回の手の位置を保持するプロパティ
+    var previousHandPosition: SIMD3<Float>? = nil
+    
+    let noiseThreshold: Double = 0.005
+    
+    private var counter = 0
+    
+    private let checkInterval = 50
+    
     func spawnSphereOnGunGesture(handAnchor: HandAnchor?) {
         guard let handAnchor = handAnchor,
-        let handLocation = detectGunGestureTransform(handAnchor: handAnchor) else {
+        let handLocation = detectOpenHandGestureTransform(handAnchor: handAnchor) else {
             return
         }
         
-        // 球体のModelEntity
-        let entity = ModelEntity(
-            mesh: .generateSphere(radius: 0.05),
-            materials: [SimpleMaterial(color: .white, isMetallic: true)],
-            collisionShape: .generateSphere(radius: 0.05),
-            mass: 1.0
-        )
+        let currentHandPosition = SIMD3<Float>(handLocation.columns.3.x,
+                                               handLocation.columns.3.y,
+                                               handLocation.columns.3.z)
         
-        // 球体を生成する位置
-        entity.transform.translation = Transform(matrix: handLocation).translation + calculateTranslationOffset(handAnchor: handAnchor)
-        // 球体を飛ばす方向
-        let forceDirection = calculateForceDirection(handAnchor: handAnchor)
-        entity.addForce(forceDirection * 300, relativeTo: nil)
-        // 球体をcontentEntityの子として追加
-        contentEntity.addChild(entity)
+        if previousHandPosition == nil {
+            previousHandPosition = currentHandPosition
+            counter = 0
+            return
+        }
+        counter += 1  // カウンターを増やす
+        
+        if counter >= self.checkInterval {
+            if let previousHandPosition = previousHandPosition {
+                 let deltaX = Double(currentHandPosition.x) - Double(previousHandPosition.x)
+                 
+                 print("currentHandPosition.x: \(currentHandPosition.x)")
+                 print("previousHandPosition.x: \(previousHandPosition.x)")
+                 print("deltaX: \(deltaX)")
+                 
+                 // 差分がノイズ閾値より大きい場合、手を振ったと判定
+                 if abs(deltaX) > noiseThreshold {
+                     print("手を振った動作を検知しました！")
+                 }
+             }
+             
+             // カウンターと前回の位置をリセット
+             self.previousHandPosition = currentHandPosition
+             counter = 0
+        }
+        
+        // 前回の手の位置が存在する場合、X軸の差分をチェック
+//        if let previousHandPosition = previousHandPosition {
+//            
+//            
+//            let deltaX = Double(currentHandPosition.x) - Double(previousHandPosition.x)
+//            
+//            print("currentHandPosition.x: \(currentHandPosition.x)")
+//            print("previousHandPosition.x: \(previousHandPosition.x)")
+//
+//            print("deltaX: \(deltaX)")
+//            
+//            // ノイズ（微小な動き）を無視
+//            if abs(deltaX) < noiseThreshold {
+//                return
+//            }
+//        }
+        
+        // 現在の位置を前回の位置として保持
+        previousHandPosition = currentHandPosition
+        
+//        // 球体のModelEntity
+//        let entity = ModelEntity(
+//            mesh: .generateSphere(radius: 0.05),
+//            materials: [SimpleMaterial(color: .white, isMetallic: true)],
+//            collisionShape: .generateSphere(radius: 0.05),
+//            mass: 1.0
+//        )
+//        
+//        // 球体を生成する位置
+//        entity.transform.translation = Transform(matrix: handLocation).translation + calculateTranslationOffset(handAnchor: handAnchor)
+//        // 球体を飛ばす方向
+//        let forceDirection = calculateForceDirection(handAnchor: handAnchor)
+//        entity.addForce(forceDirection * 300, relativeTo: nil)
+//        // 球体をcontentEntityの子として追加
+//        contentEntity.addChild(entity)
     }
     
-    /// 銃を撃つポーズの計算
-    func detectGunGestureTransform(handAnchor: HandAnchor?) -> simd_float4x4? {
-        // TODO: コード解析
+    /// 手をパーに広げるジェスチャーを検出する
+    func detectOpenHandGestureTransform(handAnchor: HandAnchor?) -> simd_float4x4? {
         
         guard let handAnchor = handAnchor else { return nil }
+                
+        // 3(親指), 7(人差し指), 12(中指), 17(薬指), 23(小指)
         guard
-            let handThumbTip = handAnchor.handSkeleton?.joint(.thumbTip),
-            let handIndexFingerKnuckle = handAnchor.handSkeleton?.joint(.indexFingerKnuckle),
-            handThumbTip.isTracked &&
-                handIndexFingerKnuckle.isTracked
+            // 3(親指)
+            let handThumbIntermediateTip = handAnchor.handSkeleton?.joint(.thumbIntermediateTip),
+            // 7(人差し指)
+            let handIndexFingerIntermediateBase = handAnchor.handSkeleton?.joint(.indexFingerIntermediateBase),
+            // 12(中指)
+            let handMiddleFingerIntermediateBase = handAnchor.handSkeleton?.joint(.middleFingerIntermediateBase),
+            // 17(薬指)
+            let handRingFingerIntermediateBase = handAnchor.handSkeleton?.joint(.ringFingerIntermediateBase),
+            // 23(小指)
+            let handLittleFingerIntermediateTip = handAnchor.handSkeleton?.joint(.littleFingerIntermediateTip),
+            // すべての指がトラッキングされているかどうか
+                handThumbIntermediateTip.isTracked &&
+                handIndexFingerIntermediateBase.isTracked &&
+                handMiddleFingerIntermediateBase.isTracked &&
+                handRingFingerIntermediateBase.isTracked &&
+                handLittleFingerIntermediateTip.isTracked
         else {
             return nil
         }
         
-        let originFromHandThumbTipTransform = matrix_multiply(
-            handAnchor.originFromAnchorTransform, handThumbTip.anchorFromJointTransform
+        // 親指
+        let originFromhandThumbIntermediateTipTransform = matrix_multiply(
+            handAnchor.originFromAnchorTransform, handThumbIntermediateTip.anchorFromJointTransform
         ).columns.3.xyz
         
-        let originFromHandIndexFingerKnuckleTransform = matrix_multiply(
-            handAnchor.originFromAnchorTransform, handIndexFingerKnuckle.anchorFromJointTransform
+        // 人差し指
+        let originFromHandIndexFingerIntermediateBaseTransform = matrix_multiply(
+            handAnchor.originFromAnchorTransform, handIndexFingerIntermediateBase.anchorFromJointTransform
         ).columns.3.xyz
         
+        // 中指
+        let originFromHandMiddleFingerIntermediateBaseTransform = matrix_multiply(
+            handAnchor.originFromAnchorTransform, handMiddleFingerIntermediateBase.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 薬指
+        let originFromHandRingFingerIntermediateBaseTransform = matrix_multiply(
+            handAnchor.originFromAnchorTransform, handRingFingerIntermediateBase.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 小指
+        let originFromHandLittleFingerIntermediateTipTransform = matrix_multiply(
+            handAnchor.originFromAnchorTransform, handLittleFingerIntermediateTip.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 親指と人差し指の距離計算
         let thumbToIndexFingerDistance = distance(
-            originFromHandThumbTipTransform,
-            originFromHandIndexFingerKnuckleTransform
+            originFromhandThumbIntermediateTipTransform,
+            originFromHandIndexFingerIntermediateBaseTransform
         )
+        let isThumbToindexFingerDistance = thumbToIndexFingerDistance > 0.05
         
-        // 親指と人差し指の根本が接触しているか判断
-        if thumbToIndexFingerDistance < 0.04 { // 接触していると見なす距離の閾値
+        // 人差し指と中指の距離計算
+        let indexFingerToMiddleFingerDistance = distance(
+            originFromHandIndexFingerIntermediateBaseTransform,
+            originFromHandMiddleFingerIntermediateBaseTransform
+        )
+        let isIndexFingerToMiddleFingerDistance = indexFingerToMiddleFingerDistance > 0.03
+        
+        // 中指と薬指の距離計算
+        let middleFingerToRingFingerDistance = distance(
+            originFromHandMiddleFingerIntermediateBaseTransform,
+            originFromHandRingFingerIntermediateBaseTransform
+        )
+        let isMiddleFingerToRingFingerDistance = middleFingerToRingFingerDistance > 0.023
+        
+        // 薬指と小指の距離計算
+        let ringFingerToLittleFingerDistance = distance(
+            originFromHandRingFingerIntermediateBaseTransform,
+            originFromHandLittleFingerIntermediateTipTransform
+        )
+        let isRingFingerToLittleFingerDistance = ringFingerToLittleFingerDistance > 0.027
+        
+        if isThumbToindexFingerDistance &&
+            isIndexFingerToMiddleFingerDistance &&
+            isMiddleFingerToRingFingerDistance &&
+            isRingFingerToLittleFingerDistance {
             return handAnchor.originFromAnchorTransform
         } else {
             return nil
