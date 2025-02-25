@@ -10,18 +10,48 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
-
+    
+    @Environment(EntityModel.self) var model
+    
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
-
-            ToggleImmersiveSpaceButton()
+        
+        let handTrakingScreen = HandTrakingScreen.from(state: model)
+        
+        Group {
+            
+            switch handTrakingScreen {
+                
+            case .StartScreen:
+                VStack {
+                    Model3D(named: "Scene", bundle: realityKitContentBundle)
+                        .padding(.bottom, 50)
+                    
+                    Text("Hello, world!")
+                    
+                    ToggleImmersiveSpaceButton()
+                }
+                .padding()
+                
+            case .HandTrackingScreen:
+                // ハンドジェスチャーを表示
+                HandGestureView(handGesture: model.handGesture)
+            }
         }
-        .padding()
     }
+}
+
+enum HandTrakingScreen {
+    
+    @MainActor static func from(state: EntityModel) -> Self {
+        if state.isPlaying {
+            return .HandTrackingScreen
+        } else {
+            return .StartScreen
+        }
+    }
+    
+    case StartScreen
+    case HandTrackingScreen
 }
 
 #Preview(windowStyle: .automatic) {

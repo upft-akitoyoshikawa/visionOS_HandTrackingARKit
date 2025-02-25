@@ -10,6 +10,7 @@ import SwiftUI
 struct ToggleImmersiveSpaceButton: View {
 
     @Environment(AppModel.self) private var appModel
+    @Environment(EntityModel.self) var model
 
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
@@ -32,7 +33,10 @@ struct ToggleImmersiveSpaceButton: View {
                                 // Don't set immersiveSpaceState to .open because there
                                 // may be multiple paths to ImmersiveView.onAppear().
                                 // Only set .open in ImmersiveView.onAppear().
+                            
+                            model.isPlaying = true
                                 break
+                            
 
                             case .userCancelled, .error:
                                 // On error, we need to mark the immersive space

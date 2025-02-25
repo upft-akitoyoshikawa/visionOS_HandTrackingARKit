@@ -17,6 +17,7 @@ struct HandTrackingARKitApp: App {
         WindowGroup {
             ContentView()
                 .environment(appModel)
+                .environment(model)
         }
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
