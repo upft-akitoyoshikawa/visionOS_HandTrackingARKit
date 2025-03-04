@@ -52,84 +52,36 @@ class EntityModel {
                 let anchor = update.anchor
                 
                 if anchor.chirality == .left {
-//                    latestHandTracking?.left = anchor
-//                    spawnSphereOnWaveHand(handAnchor: latestHandTracking?.left)
-                } else if anchor.chirality == .right {
+                    latestHandTracking?.left = anchor
+                } else {
                     latestHandTracking?.right = anchor
-                    spawnSphereOnWaveHand(handAnchor: latestHandTracking?.right)
                 }
+                
+                detectionHandGesture(leftHandAnchor: latestHandTracking?.left, rightHandAnchor: latestHandTracking?.right)
             default:
                 break
-                
             }
-//            for jointName in HandSkeleton.JointName.allCases {
-//                guard let joint = handAnchor.handSkeleton?.joint(jointName),
-//                      let jointEntity = contentEntity.findEntity(named: "\(jointName)\(handAnchor.chirality)") else {
-//                    continue
-//                }
-//                
-//                let origin = handAnchor.originFromAnchorTransform * joint.anchorFromJointTransform
-//                jointEntity.setTransformMatrix(origin, relativeTo: nil)
-//            }
         }
     }
     
-    // 前回の手の位置を保持するプロパティ
-    var previousHandPosition: SIMD3<Float>? = nil
-    
-    let noiseThreshold: Double = 0.005
-    
-    private var counter = 0
-    
-    private let checkInterval = 50
-        
-    func spawnSphereOnWaveHand(handAnchor: HandAnchor?) {
-        
-        // 手をパーに広げるジェスチャーを検出、検出したらsimd_float4x4を返す
-        guard let handAnchor = handAnchor else {
+    func detectionHandGesture(leftHandAnchor: HandAnchor?, rightHandAnchor: HandAnchor?) {
+        // 左右のHandAnchorのnil、トラッキングチェック
+        guard let leftHandAnchor = leftHandAnchor,
+              let rightHandAnchor = rightHandAnchor,
+              leftHandAnchor.isTracked, rightHandAnchor.isTracked else {
             self.handGesture = .None
             return
         }
 
-        if detectHandGesture(handAnchor: handAnchor) {
-            // TODO: なんかここがすごい反応していたから、確認
-            print("手をパーに広げるジェスチャーを検出 time: \(Date())")
+        if detectHandGesture(handAnchor: rightHandAnchor) {
             self.handGesture = .Hand
-        } else if detectThumsupGesture(handAnchor: handAnchor) {
-            // TODO: 明日確認する
-            print("サムズアップジェスチャーを検出 time: \(Date())")
+        } else if detectThumsupGesture(handAnchor: rightHandAnchor) {
             self.handGesture = .ThumbsUp
+        } else if heartGestureDetection(leftHandAnchor: leftHandAnchor, rightHandAnchor: rightHandAnchor) {
+            self.handGesture = .heart
         } else {
             self.handGesture = .None
         }
-
-    }
-    
-    private func updateCounterAndCheckGesture(current: SIMD3<Float>, previous: SIMD3<Float>) {
-        counter += 1
-        
-        guard counter >= checkInterval else { return }
-        
-        if detectHandShakeGesture(current: current, previous: previous) {
-            print("手を振った動作を検知しました！")
-        }
-        
-        resetCount()
-    }
-    
-    private func detectHandShakeGesture(current: SIMD3<Float>, previous: SIMD3<Float>) -> Bool {
-        let deltaX = Double(current.x) - Double(previous.x)
-        
-        print("currentHandPosition.x: \(current.x)")
-        print("previousHandPosition.x: \(previous.x)")
-        print("deltaX: \(deltaX)")
-        
-        // 差分がノイズ閾値より大きい場合、手を振ったと判定
-        return abs(deltaX) > noiseThreshold
-    }
-    
-    private func resetCount() {
-        counter = 0
     }
     
     /// 手をパーに広げるジェスチャーを検出する
@@ -188,7 +140,7 @@ class EntityModel {
             originFromHandIndexFingerIntermediateBaseTransform
         )
         let isThumbToindexFingerDistance = thumbToIndexFingerDistance > 0.05
-        
+                
         // 人差し指と中指の距離計算
         let indexFingerToMiddleFingerDistance = distance(
             originFromHandIndexFingerIntermediateBaseTransform,
@@ -223,14 +175,14 @@ class EntityModel {
     /// 手をサムズアップしたジェスチャーを検出する
     func detectThumsupGesture(handAnchor: HandAnchor) -> Bool {
         
-        // 0（手首）, 4（親指の先端）, 7（人差し指の第一関節
+        // 0（手首）, 4（親指の先端）, 7（人差し指の第2関節）
         // 9（人差し指の先端）, 14（中指の先端）, 19（薬指の先端）, 24（小指の先端）
         guard
             // 0（手首）
             let handWrist = handAnchor.handSkeleton?.joint(.wrist),
             // 4（親指の先端）
             let handThumbTip = handAnchor.handSkeleton?.joint(.thumbTip),
-            // 7（人差し指の第一関節）
+            // 7（人差し指の第2関節）
             let handIndexFingerIntermediateBase = handAnchor.handSkeleton?.joint(.indexFingerIntermediateBase),
                 
             // 他の4本の指（人差し指、中指、薬指、小指）の先端
@@ -266,7 +218,7 @@ class EntityModel {
             handAnchor.originFromAnchorTransform, handThumbTip.anchorFromJointTransform
         ).columns.3.xyz
         
-        // 人差し指の第一関節
+        // 人差し指の第2関節
         let originFromHandIndexIntermediateBaseTransform = matrix_multiply(
             handAnchor.originFromAnchorTransform, handIndexFingerIntermediateBase.anchorFromJointTransform
         ).columns.3.xyz
@@ -292,23 +244,15 @@ class EntityModel {
         ).columns.3.xyz
         
         // サムズアップの判定
-        print("-----------------------------")
         
         // 親指が人差し指の第一関節よりも上にある
         let isThumbUp = distance(originFromHandThumbTipTransform, originFromHandIndexIntermediateBaseTransform) > 0.05
-        print("isThumbUp: \(isThumbUp)")
         
         // 他の4本の指が手首の近く（折りたたまれている）
         let isIndexBent = distance(originFromHandWristTransform, originFromHandIndexTipTransform) < 0.09
-        print("isIndexBent: \(isIndexBent)")
         let isMiddleBent = distance(originFromHandWristTransform, originFromHandMiddleTipTransform) < 0.09
-        print("isMiddleBent: \(isMiddleBent)")
         let isRingBent = distance(originFromHandWristTransform, originFromHandRingTipTransform) < 0.09
-        print("isRingBent: \(isRingBent)")
         let isLittleBent = distance(originFromHandWristTransform, originFromHandLittleTipTransform) < 0.09
-        print("isLittleBent: \(isLittleBent)")
-        
-        print("-----------------------------")
         
         // 全ての条件を満たす場合、サムズアップと判定
         if isThumbUp && isIndexBent && isMiddleBent && isRingBent && isLittleBent {
@@ -318,17 +262,81 @@ class EntityModel {
         }
     }
     
-    /// 指の長さに相当するoffsetを定義
-    func calculateTranslationOffset(handAnchor: HandAnchor) -> SIMD3<Float> {
-        // TODO: コード解析
-        let handRotation = Transform(matrix: handAnchor.originFromAnchorTransform).rotation
-        return handRotation.act(handAnchor.chirality == .left ? SIMD3(0.25, 0, 0) : SIMD3(-0.25, 0, 0))
-    }
-    
-    /// 手の向きに基づいて力を加える方向を計算
-    func calculateForceDirection(handAnchor: HandAnchor) -> SIMD3<Float> {
-        // TODO: コード解析
-        let handRotation = Transform(matrix: handAnchor.originFromAnchorTransform).rotation
-        return handRotation.act(handAnchor.chirality == .left ? SIMD3(1, 0, 0) : SIMD3(-1, 0, 0))
+    /// 両手を使った指ハートジェスチャを検出する
+    private func heartGestureDetection(leftHandAnchor: HandAnchor, rightHandAnchor: HandAnchor) -> Bool {
+        
+        guard
+            // 8（左手 人差し指の第1関節）
+            let leftHandIndexFingerIntermediateBase = leftHandAnchor.handSkeleton?.joint(.indexFingerIntermediateTip),
+            // 9（左手 人差し指の先端）
+            let reftHandindexFingerTip = leftHandAnchor.handSkeleton?.joint(.indexFingerTip),
+            // 14（左手 中指の先端）
+            let reftHandMiddleFingerTip = leftHandAnchor.handSkeleton?.joint(.middleFingerTip),
+            
+            // 8（右手 人差し指の第1関節）
+            let rightHandIndexFingerIntermediateBase = rightHandAnchor.handSkeleton?.joint(.indexFingerIntermediateTip),
+            // 9（右手 人差し指の先端）
+            let rightHandindexFingerTip = rightHandAnchor.handSkeleton?.joint(.indexFingerTip),
+            // 14（右手 中指の先端）
+            let rightHandMiddleFingerTip = rightHandAnchor.handSkeleton?.joint(.middleFingerTip),
+
+            // すべての指がトラッキングされているかどうか
+            leftHandIndexFingerIntermediateBase.isTracked &&
+            reftHandindexFingerTip.isTracked &&
+            reftHandMiddleFingerTip.isTracked &&
+            rightHandindexFingerTip.isTracked &&
+            rightHandMiddleFingerTip.isTracked else {
+            
+            return false
+        }
+        
+        // 各関節のワールド座標を取得
+        // 左手 第一関節
+        let originFromLeftHandIndexFingerIntermediateBaseTransform = matrix_multiply(
+            leftHandAnchor.originFromAnchorTransform, leftHandIndexFingerIntermediateBase.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 左手 人差し指の先端
+        let originFromReftHandIndexFingerTipTransform = matrix_multiply(
+            leftHandAnchor.originFromAnchorTransform, reftHandindexFingerTip.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 左手 中指の先端
+        let originFromReftHandMiddleFingerTipTransform = matrix_multiply(
+            leftHandAnchor.originFromAnchorTransform, reftHandMiddleFingerTip.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 右手 第一関節
+        let originFromRightHandIndexFingerIntermediateBaseTransform = matrix_multiply(
+            rightHandAnchor.originFromAnchorTransform, rightHandIndexFingerIntermediateBase.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 右手 人差し指の先端
+        let originFromRightHandIndexFingerTipTransform = matrix_multiply(
+            rightHandAnchor.originFromAnchorTransform, rightHandindexFingerTip.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 右手 中指の先端
+        let originFromRightHandMiddleFingerTipTransform = matrix_multiply(
+            rightHandAnchor.originFromAnchorTransform, rightHandMiddleFingerTip.anchorFromJointTransform
+        ).columns.3.xyz
+        
+        // 指ハートを検出
+        // 左手の人差し指の先端と、右手の人差し指の先端の、距離が近い場合を判定
+        let indexFingersDistance = distance(originFromReftHandIndexFingerTipTransform, originFromRightHandIndexFingerTipTransform)
+        let isIndexFingersDistance = indexFingersDistance < 0.012
+        // 左手の人差し指第一関節と、右手の人差し指第一関節の距離が近い場合を判定
+        let originFromDistance = distance(originFromLeftHandIndexFingerIntermediateBaseTransform, originFromRightHandIndexFingerIntermediateBaseTransform)
+        let isOriginFromDistance = originFromDistance < 0.042
+        
+        // 左手の中指の先端と、右手の中指の先端の距離が近い場合を判定
+        let middleFingersDistance = distance(originFromReftHandMiddleFingerTipTransform, originFromRightHandMiddleFingerTipTransform)
+        let isMiddleFingersDistance = middleFingersDistance < 0.02
+        
+        if isIndexFingersDistance && isOriginFromDistance && isMiddleFingersDistance {
+            return true
+        } else {
+            return false
+        }
     }
 }

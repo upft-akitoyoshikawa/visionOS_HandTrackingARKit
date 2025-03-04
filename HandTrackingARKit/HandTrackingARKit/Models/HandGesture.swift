@@ -7,13 +7,14 @@
 
 // ハンドジェスチャーの種類
 enum HandGestureType {
-    case None, Hand, ThumbsUp
+    case None, Hand, ThumbsUp, heart
     
     var displayName: String {
         switch self {
         case .None: return "No Gesture"
         case .Hand: return "Open Hand ✋"
         case .ThumbsUp: return "Thumbs Up 👍"
+        case .heart: return "Heart❤"
         }
     }
     
@@ -22,6 +23,7 @@ enum HandGestureType {
         case .None: return "hand.raised.slash"
         case .Hand: return "hand.raised.fill"
         case .ThumbsUp: return "hand.thumbsup.fill"
+        case .heart: return "heart.fill"
         }
     }
 }
