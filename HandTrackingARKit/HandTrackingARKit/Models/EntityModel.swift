@@ -65,19 +65,12 @@ class EntityModel {
     }
     
     func detectionHandGesture(leftHandAnchor: HandAnchor?, rightHandAnchor: HandAnchor?) {
-        // 左右のHandAnchorのnil、トラッキングチェック
-        guard let leftHandAnchor = leftHandAnchor,
-              let rightHandAnchor = rightHandAnchor,
-              leftHandAnchor.isTracked, rightHandAnchor.isTracked else {
-            self.handGesture = .None
-            return
-        }
-
+        
         if detectHandGesture(handAnchor: rightHandAnchor) {
             self.handGesture = .Hand
         } else if detectThumsupGesture(handAnchor: rightHandAnchor) {
             self.handGesture = .ThumbsUp
-        } else if heartGestureDetection(leftHandAnchor: leftHandAnchor, rightHandAnchor: rightHandAnchor) {
+        } else if detectHeartGesture(leftHandAnchor: leftHandAnchor, rightHandAnchor: rightHandAnchor) {
             self.handGesture = .heart
         } else {
             self.handGesture = .None
@@ -85,7 +78,12 @@ class EntityModel {
     }
     
     /// 手をパーに広げるジェスチャーを検出する
-    func detectHandGesture(handAnchor: HandAnchor) -> Bool {
+    func detectHandGesture(handAnchor: HandAnchor?) -> Bool {
+        
+        guard let handAnchor = handAnchor,
+              handAnchor.isTracked else {
+            return false
+        }
         
         // 3(親指), 7(人差し指), 12(中指), 17(薬指), 23(小指)
         guard
@@ -173,7 +171,12 @@ class EntityModel {
     }
     
     /// 手をサムズアップしたジェスチャーを検出する
-    func detectThumsupGesture(handAnchor: HandAnchor) -> Bool {
+    func detectThumsupGesture(handAnchor: HandAnchor?) -> Bool {
+        
+        guard let handAnchor = handAnchor,
+              handAnchor.isTracked else {
+            return false
+        }
         
         // 0（手首）, 4（親指の先端）, 7（人差し指の第2関節）
         // 9（人差し指の先端）, 14（中指の先端）, 19（薬指の先端）, 24（小指の先端）
@@ -263,7 +266,13 @@ class EntityModel {
     }
     
     /// 両手を使った指ハートジェスチャを検出する
-    private func heartGestureDetection(leftHandAnchor: HandAnchor, rightHandAnchor: HandAnchor) -> Bool {
+    private func detectHeartGesture(leftHandAnchor: HandAnchor?, rightHandAnchor: HandAnchor?) -> Bool {
+        
+        guard let leftHandAnchor = leftHandAnchor,
+              let rightHandAnchor = rightHandAnchor,
+              leftHandAnchor.isTracked, rightHandAnchor.isTracked else {
+            return false
+        }
         
         guard
             // 8（左手 人差し指の第1関節）
