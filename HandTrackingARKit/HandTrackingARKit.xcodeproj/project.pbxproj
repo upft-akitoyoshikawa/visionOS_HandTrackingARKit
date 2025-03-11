@@ -17,7 +17,7 @@
 		BB716E0E2D36379200FE09A3 /* HandTrackingARKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E042D36379200FE09A3 /* HandTrackingARKitApp.swift */; };
 		BB716E0F2D36379200FE09A3 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E052D36379200FE09A3 /* ImmersiveView.swift */; };
 		BB716E102D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E072D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift */; };
-		BB716E132D3637D000FE09A3 /* EntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E122D3637C800FE09A3 /* EntityModel.swift */; };
+		BB716E132D3637D000FE09A3 /* HandTrackingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E122D3637C800FE09A3 /* HandTrackingModel.swift */; };
 		BB716E172D36449D00FE09A3 /* SIMD4Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB716E162D36449700FE09A3 /* SIMD4Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,7 @@
 		BB716E052D36379200FE09A3 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
 		BB716E062D36379200FE09A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB716E072D36379200FE09A3 /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
-		BB716E122D3637C800FE09A3 /* EntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModel.swift; sourceTree = "<group>"; };
+		BB716E122D3637C800FE09A3 /* HandTrackingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingModel.swift; sourceTree = "<group>"; };
 		BB716E162D36449700FE09A3 /* SIMD4Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIMD4Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,7 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				BB1D09862D5C8A0400C8E232 /* HandGesture.swift */,
-				BB716E122D3637C800FE09A3 /* EntityModel.swift */,
+				BB716E122D3637C800FE09A3 /* HandTrackingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,7 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB716E172D36449D00FE09A3 /* SIMD4Extension.swift in Sources */,
-				BB716E132D3637D000FE09A3 /* EntityModel.swift in Sources */,
+				BB716E132D3637D000FE09A3 /* HandTrackingModel.swift in Sources */,
 				BB716E0C2D36379200FE09A3 /* AppModel.swift in Sources */,
 				BB716E0D2D36379200FE09A3 /* ContentView.swift in Sources */,
 				BB1D09872D5C8A0800C8E232 /* HandGesture.swift in Sources */,

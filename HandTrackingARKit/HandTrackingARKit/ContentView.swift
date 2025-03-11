@@ -11,7 +11,7 @@ import RealityKitContent
 
 struct ContentView: View {
     
-    @Environment(EntityModel.self) var model
+    @Environment(HandTrackingModel.self) var model
     
     var body: some View {
         
@@ -42,7 +42,7 @@ struct ContentView: View {
 
 enum HandTrakingScreen {
     
-    @MainActor static func from(state: EntityModel) -> Self {
+    @MainActor static func from(state: HandTrackingModel) -> Self {
         if state.isPlaying {
             return .HandTrackingScreen
         } else {

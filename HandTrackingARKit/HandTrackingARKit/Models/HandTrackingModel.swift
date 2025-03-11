@@ -10,9 +10,9 @@ import RealityKit
 
 @Observable
 @MainActor
-class EntityModel {
+class HandTrackingModel {
 
-    let seession = ARKitSession()
+    let session = ARKitSession()
     
     let handTracking = HandTrackingProvider()
     
@@ -31,15 +31,27 @@ class EntityModel {
     }
     
     // ハンドトラッキングがサポートされているかどうか
-    var handTrakingProviderSupported: Bool {
+    var handTrackingProviderSupported: Bool {
         HandTrackingProvider.isSupported
     }
-    
     
     var isPlaying = false
     
     var isReadyToRun: Bool {
         handTracking.state == .initialized || handTracking.state == .paused
+    }
+    
+    ///  ハンドトラッキングを開始する
+    func startHandTracking() async {
+        do {
+            if self.handTrackingProviderSupported && self.isReadyToRun {
+                try await session.run([handTracking])
+            } else {
+                fatalError("ハンドトラッキングがサポートされていないか、実行準備ができてない")
+            }
+        } catch {
+            fatalError("session run 失敗: \(error)")
+        }
     }
     
     /// ARKitからハンドトラッキング情報を更新する
@@ -85,9 +97,9 @@ class EntityModel {
             return false
         }
         
-        // 3(親指), 7(人差し指), 12(中指), 17(薬指), 23(小指)
+        // 3(親指の第一関節), 7(人差し指の第二関節), 12(中指の第二関節), 17(薬指の第二関節), 23(小指の第一関節)
         guard
-            // 3(親指)
+            // 3(親指の第一関節)
             let handThumbIntermediateTip = handAnchor.handSkeleton?.joint(.thumbIntermediateTip),
             // 7(人差し指)
             let handIndexFingerIntermediateBase = handAnchor.handSkeleton?.joint(.indexFingerIntermediateBase),

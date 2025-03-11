@@ -10,7 +10,7 @@ import SwiftUI
 struct ToggleImmersiveSpaceButton: View {
 
     @Environment(AppModel.self) private var appModel
-    @Environment(EntityModel.self) var model
+    @Environment(HandTrackingModel.self) var model
 
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace

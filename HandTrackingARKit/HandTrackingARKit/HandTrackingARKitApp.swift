@@ -11,7 +11,7 @@ import SwiftUI
 struct HandTrackingARKitApp: App {
 
     @State private var appModel = AppModel()
-    @State private var model = EntityModel()
+    @State private var model = HandTrackingModel()
 
     var body: some Scene {
         WindowGroup {

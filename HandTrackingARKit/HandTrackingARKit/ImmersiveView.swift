@@ -11,30 +11,18 @@ import RealityKitContent
 
 struct ImmersiveView: View {
 
-    @Environment(EntityModel.self) var model
-    
-    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    @Environment(HandTrackingModel.self) var model
     
     var body: some View {
         RealityView { content in
             content.add(model.setupContentEntity())
         }
         .task {
-            do {
-                if model.handTrakingProviderSupported && model.isReadyToRun {
-                    try await model.seession.run([model.handTracking])
-                } else {
-                    await dismissImmersiveSpace()
-                }
-            } catch {
-                print("session run 失敗: \(error)")
-                await dismissImmersiveSpace()
-            }
+            await model.startHandTracking()
         }
         .task {
             await model.processHandUpdated()
         }
-        
     }
 }
 
